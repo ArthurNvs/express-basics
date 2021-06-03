@@ -2,6 +2,10 @@ const express = require('express')
 const app = express()
 const path = '/api'
 
+const mid = require('./middleware')
+
+app.use(mid('hard stuff'))
+
 app.use((req, res, next) => {
     console.log('First call..')
     next()
