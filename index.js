@@ -4,6 +4,11 @@ const bodyParser = require('body-parser')
 const path = '/api'
 
 const mid = require('./middleware')
+const userApi = require('./api/user')
+require('./api/product')(app, 'text param..')
+
+app.post('/user', userApi.save)
+app.get('/user', userApi.getUser)
 
 app.use(bodyParser.text())
 app.use(bodyParser.json())
