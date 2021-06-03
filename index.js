@@ -11,6 +11,25 @@ app.use((req, res, next) => {
     next()
 })
 
+app.get('/customers/data', (req, res) => {
+    res.send(`Customer data: ${req.query.info}; <br> from ${req.query.place}`)
+})
+
+app.post('/body', (req, res) => {
+    let body = ''
+    req.on('data', function(part){
+        body += part
+    })
+
+    req.on('end', function() {
+        res.send(body)
+    })
+})
+
+app.get('/customers/:id', (req, res) => {
+    res.send(`Customer = ${req.params.id}.`)
+})
+
 app.get(path, (request, response, next) => {
     response.json([
         {"name": "Arthur", "job": "Developer"},
