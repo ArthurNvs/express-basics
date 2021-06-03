@@ -1,9 +1,13 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
 const path = '/api'
 
 const mid = require('./middleware')
 
+app.use(bodyParser.text())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended:true }))
 app.use(mid('hard stuff'))
 
 app.use((req, res, next) => {
@@ -16,14 +20,15 @@ app.get('/customers/data', (req, res) => {
 })
 
 app.post('/body', (req, res) => {
-    let body = ''
-    req.on('data', function(part){
-        body += part
-    })
+    // let body = ''
+    // req.on('data', function(part){
+    //     body += part
+    // })
 
-    req.on('end', function() {
-        res.send(body)
-    })
+    // req.on('end', function() {
+    //     res.send(body)
+    // })
+    res.send(req.body)
 })
 
 app.get('/customers/:id', (req, res) => {
